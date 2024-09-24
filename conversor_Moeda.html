@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #838383;
+        }
+
+        .calculadora {
+            background-color: #98c4ec;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #00509E;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003d80;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <h1>Conversor De Moedas</h1>
+        <input type="number" id="valor" placeholder="Digite o valor" step="0.01">
+        <select id="opcao">
+            <option value="real-dolar">Real para Dólar</option>
+            <option value="real-euro">Real para Euro</option>
+            <option value="dolar-real">Dólar para Real</option>
+            <option value="euro-real">Euro para Real</option>
+        </select>
+        <button onclick="converter()">Converter</button>
+        <h2 id="resultado"></h2>
+    </div>
+
+    <script>
+        function converter() {
+            const valor = parseFloat(document.getElementById("valor").value);
+            const opcao = document.getElementById("opcao").value;
+            let resultado;
+
+            // Definir taxas de câmbio (valores aproximados; em um sistema real, isso seria dinâmico)
+            const taxaRealParaDolar = 0.20; // Exemplo: 1 Real = 0,20 Dólar
+            const taxaRealParaEuro = 0.18;  // Exemplo: 1 Real = 0,18 Euro
+            const taxaDolarParaReal = 5.00; // Exemplo: 1 Dólar = 5,00 Reais
+            const taxaEuroParaReal = 5.50;  // Exemplo: 1 Euro = 5,50 Reais
+
+            if (isNaN(valor)) {
+                document.getElementById("resultado").innerText = "Por favor, insira um valor válido.";
+                return;
+            }
+
+            switch (opcao) {
+                case "real-dolar":
+                    resultado = valor * taxaRealParaDolar;
+                    document.getElementById("resultado").innerText = `Valor em Dólar: $${resultado.toFixed(2)}`;
+                    break;
+                case "real-euro":
+                    resultado = valor * taxaRealParaEuro;
+                    document.getElementById("resultado").innerText = `Valor em Euro: €${resultado.toFixed(2)}`;
+                    break;
+                case "dolar-real":
+                    resultado = valor * taxaDolarParaReal;
+                    document.getElementById("resultado").innerText = `Valor em Real: R$${resultado.toFixed(2)}`;
+                    break;
+                case "euro-real":
+                    resultado = valor * taxaEuroParaReal;
+                    document.getElementById("resultado").innerText = `Valor em Real: R$${resultado.toFixed(2)}`;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
